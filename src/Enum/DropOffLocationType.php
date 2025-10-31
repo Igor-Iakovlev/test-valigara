@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Enum;
+
+enum DropOffLocationType: string
+{
+    case FRONT_DOOR = 'FRONT_DOOR';
+    case DELIVERY_BOX = 'DELIVERY_BOX';
+    case GAS_METER_BOX = 'GAS_METER_BOX';
+    case BICYCLE_BASKET = 'BICYCLE_BASKET';
+    case GARAGE = 'GARAGE';
+    case RECEPTIONIST = 'RECEPTIONIST';
+    case FALLBACK_NEIGHBOR_DELIVERY = 'FALLBACK_NEIGHBOR_DELIVERY';
+    case DO_NOT_LEAVE_UNATTENDED = 'DO_NOT_LEAVE_UNATTENDED';
+}
