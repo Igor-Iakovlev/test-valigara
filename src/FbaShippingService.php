@@ -10,6 +10,8 @@ use GuzzleHttp\Exception\GuzzleException;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
+use Symfony\Component\RateLimiter\LimiterInterface;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class FbaShippingService implements ShippingServiceInterface
@@ -17,16 +19,24 @@ class FbaShippingService implements ShippingServiceInterface
     private const CREATE_ORDER_URI = '/fba/outbound/2020-07-01/fulfillmentOrders';
     private const GET_ORDER_URI = '/fba/outbound/2020-07-01/fulfillmentOrders/{orderId}';
 
+    private LimiterInterface $createOrderLimit;
+    private LimiterInterface $getOrderLimit;
+
     /**
      * @param ClientInterface $client
      * @param ValidatorInterface $validator
+     * @param RateLimiterFactory $rateLimiterFactory
      * @param LoggerInterface $logger
      */
     public function __construct(
         private ClientInterface $client,
         private ValidatorInterface $validator,
+        private RateLimiterFactory $rateLimiterFactory,
         private LoggerInterface $logger
-    ) {}
+    ) {
+        $this->createOrderLimit = $this->rateLimiterFactory->create('create');
+        $this->getOrderLimit = $this->rateLimiterFactory->create('get');
+    }
 
     /**
      * @param AbstractOrder $order
@@ -47,6 +57,7 @@ class FbaShippingService implements ShippingServiceInterface
 
         $orderId = $parameters->sellerFulfillmentOrderId;
         $payload = $parameters->toPayload();
+        $this->createOrderLimit->reserve(1)->wait();
         $createResponse = $this->client->request(
             'POST',
             self::CREATE_ORDER_URI,
@@ -65,6 +76,7 @@ class FbaShippingService implements ShippingServiceInterface
             $this->logger->warning('Partial FBA errors: ' . json_encode($createData['errors']));
         }
 
+        $this->getOrderLimit->reserve(1)->wait();
         $orderResponse = $this->client->request('GET', str_replace('{orderId}', $orderId, self::GET_ORDER_URI));
         $orderData = json_decode($orderResponse->getBody(), true);
 

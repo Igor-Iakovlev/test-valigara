@@ -7,6 +7,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use function DI\create;
 use function DI\get;
@@ -39,6 +40,7 @@ return [
         ->constructor(
             get('mock.client'),
             get(ValidatorInterface::class),
+            get(RateLimiterFactory::class),
             get(LoggerInterface::class)
         ),
 ];
