@@ -4,7 +4,7 @@ namespace App\Dto;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class OrderItem extends AbstractDto
+class OrderItem implements DtoInterface
 {
     #[Assert\NotNull]
     #[Assert\Type('string')]

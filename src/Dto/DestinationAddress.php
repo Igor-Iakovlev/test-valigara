@@ -5,7 +5,7 @@ namespace App\Dto;
 use PrinsFrank\Standards\Country\CountryAlpha2;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class DestinationAddress extends AbstractDto
+class DestinationAddress implements DtoInterface
 {
     #[Assert\NotNull]
     #[Assert\Type('string')]

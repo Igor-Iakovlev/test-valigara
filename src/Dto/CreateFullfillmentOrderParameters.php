@@ -12,7 +12,7 @@ use PrinsFrank\Standards\Country\CountryAlpha2;
 use PrinsFrank\Standards\Currency\CurrencyAlpha3;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateFullfillmentOrderParameters extends AbstractDto
+class CreateFullfillmentOrderParameters implements DtoInterface
 {
     public ?string $marketplaceId;
 

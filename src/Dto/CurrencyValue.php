@@ -5,7 +5,7 @@ namespace App\Dto;
 use PrinsFrank\Standards\Currency\CurrencyAlpha3;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CurrencyValue extends AbstractDto
+class CurrencyValue implements DtoInterface
 {
     #[Assert\NotNull]
     #[Assert\Type(CurrencyAlpha3::class)]

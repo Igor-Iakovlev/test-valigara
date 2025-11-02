@@ -4,7 +4,7 @@ namespace App\Dto;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class DeliveryPreferences extends AbstractDto
+class DeliveryPreferences implements DtoInterface
 {
     #[Assert\Type('string')]
     public ?string $deliveryInstructions;

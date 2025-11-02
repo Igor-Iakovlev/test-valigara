@@ -5,7 +5,7 @@ namespace App\Dto;
 use App\Enum\DropOffLocationType;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class DropOffLocation extends AbstractDto
+class DropOffLocation implements DtoInterface
 {
     #[Assert\Type(DropOffLocationType::class)]
     public DropOffLocationType $type;

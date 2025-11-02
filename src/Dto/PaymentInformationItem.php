@@ -6,7 +6,7 @@ use DateTimeInterface;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class PaymentInformationItem extends AbstractDto
+class PaymentInformationItem implements DtoInterface
 {
     #[Assert\NotNull]
     #[Assert\Type('string')]
