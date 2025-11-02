@@ -80,7 +80,7 @@ class CreateFullfillmentOrderParameters implements DtoInterface
     /**
      * @var OrderItem[]
      */
-    #[Assert\NotNull]
+    #[Assert\NotBlank]
     #[Assert\Type('array')]
     #[Assert\All([new Assert\Type(OrderItem::class)])]
     #[Assert\Valid]
@@ -112,7 +112,7 @@ class CreateFullfillmentOrderParameters implements DtoInterface
         $this->destinationAddress->stateOrRegion = $orderData['shipping_state'] ?? null;
         $this->destinationAddress->postalCode = $orderData['shipping_zip'] ?? null;
         $items = [];
-        foreach ($orderData['products'] as $product) {
+        foreach ($orderData['products'] ?? [] as $product) {
             $currency = CurrencyAlpha3::tryFrom($orderData['currency']);
 
             $item = new OrderItem();
