@@ -11,8 +11,9 @@ class FileBuyer implements BuyerInterface
 
     /**
      * @param int $id
+     * @return $this
      */
-    public function load(int $id)
+    public function load(int $id): self
     {
         $filePath = sprintf('%s/../../mock/buyer.%s.json', __DIR__, $id);
         if (!file_exists($filePath)) {
@@ -27,6 +28,7 @@ class FileBuyer implements BuyerInterface
             throw new RuntimeException("Invalid JSON in buyer file: " . json_last_error_msg());
         }
         $this->container = $data;
+        return $this;
     }
 
     /**

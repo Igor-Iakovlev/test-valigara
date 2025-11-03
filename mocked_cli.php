@@ -20,8 +20,7 @@ $buyerId = $args[1];
 
 $service = $container->get('fba.mock');
 $order = new FileOrder($orderId);
-$buyer = new FileBuyer();
-$buyer->load($buyerId);
+$buyer = (new FileBuyer())->load($buyerId);
 $result = $service->ship($order, $buyer);
 $logger = $container->get(LoggerInterface::class);
 $logger->info($result);

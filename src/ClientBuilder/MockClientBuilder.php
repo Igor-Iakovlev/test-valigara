@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support;
+namespace App\ClientBuilder;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;

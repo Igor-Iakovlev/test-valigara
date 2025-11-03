@@ -7,7 +7,6 @@
         "prinsfrank/standards": "^3.3",
         "symfony/validator": "^7.3",
         "php-di/php-di": "^7.1",
-        "fakerphp/faker": "^1.24",
         "symfony/rate-limiter": "^7.3",
         "symfony/lock": "^7.3",
         "symfony/serializer": "^7.3",
@@ -19,6 +18,6 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^12.4"
+        "phpunit/phpunit": "^12.5.x-dev"
     }
 }

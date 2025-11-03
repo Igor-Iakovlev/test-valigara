@@ -1,7 +1,7 @@
 <?php
 
+use App\ClientBuilder\MockClientBuilder;
 use App\FbaShippingService;
-use App\Support\MockClientBuilder;
 use GuzzleHttp\ClientInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
